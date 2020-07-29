@@ -139,12 +139,12 @@ public abstract class NetworkParameters {
             // A script containing the difficulty bits and the following message:
             //
             //   coin dependent
-            byte[] bytes = Utils.HEX.decode("04ffff001d01044c55552e532e204e657773202620576f726c64205265706f7274204a616e203238203230313620576974682048697320416273656e63652c205472756d7020446f6d696e6174657320416e6f7468657220446562617465");//CoinDefinition.genesisTxInBytes);
+            byte[] bytes = Utils.HEX.decode("04ffff001d01044c5c5468652057616c6c20537472656574204a6f75726e616c20536570742031382032303139204665642043757473205261746573204279205175617274657220506f696e74206275742046616365732047726f77696e672053706c6974");//CoinDefinition.genesisTxInBytes);
             TransactionInput transactionInput = new TransactionInput(n, tx, bytes);
             transactionInput.setSequenceNumber(4294967295L);
             tx.addInput(transactionInput);
 
-            byte[] pubKey = Utils.HEX.decode("04c10e83b2703ccf322f7dbd62dd5855ac7c10bd055814ce121ba32607d573b8810c02c0582aed05b4deb9c4b77b26d92428c61256cd42774babea0a073b2ed0c9");
+            byte[] pubKey = Utils.HEX.decode("042cbeb9ca34ea1b69fbef2c6c6dff7d048102e9c248eb5d889e46d2533c1a97ea09e9e96462d6d67617de5fd278c792a8a3a225bfd8f9b162eeaf67dcd0a6e928");
             ScriptBuilder scriptBuilder = new ScriptBuilder().addChunk(new ScriptChunk(65,pubKey)).op(ScriptOpCodes.OP_CHECKSIG);
             Script script = scriptBuilder.build();
             tx.addOutput(new TransactionOutput(n, tx, Coin.valueOf(CoinDefinition.genesisBlockValue, 0), script.getProgram()));
@@ -157,7 +157,7 @@ public abstract class NetworkParameters {
         genesisBlock.addTransaction(tx);
         //System.out.println("genesis tx hash: "+tx.getHashAsString());
         // genesis tx should be -> 1b2ef6e2f28be914103a277377ae7729dcd125dfeb8bf97bd5964ba72b6dc39b
-        if (!tx.getHashAsString().equals("1b2ef6e2f28be914103a277377ae7729dcd125dfeb8bf97bd5964ba72b6dc39b")) throw new IllegalStateException("invalid genesis tx: "+tx.getHashAsString());
+        if (!tx.getHashAsString().equals("89dd0b03f4b5a5e800f8f8ad2a01e5cf0b2b35beba8050a086538aa43b82b319")) throw new IllegalStateException("invalid genesis tx: "+tx.getHashAsString());
         return genesisBlock;
     }
 
